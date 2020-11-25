@@ -1,0 +1,24 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:zcml="http://namespaces.zope.org/zcml"
+  i18n_domain="eea">
+
+  <class class="Products.DCWorkflow.States.StateDefinition">
+    <implements interface="eea.progress.workflow.interfaces.IWorkflowState" />
+  </class>
+
+  <class class="Products.DCWorkflow.DCWorkflow.DCWorkflowDefinition">
+    <implements interface="eea.progress.workflow.interfaces.IWorkflow" />
+  </class>
+
+  <class class="plone.dexterity.content.Container">
+    <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
+  </class>
+
+  <adapter
+    for="eea.progress.workflow.interfaces.IBaseObject"
+    provides="eea.progress.workflow.interfaces.IWorkflowProgress"
+    factory=".adapters.WorkflowProgress"
+    />
+
+</configure>

@@ -4,5 +4,5 @@ Changelog
 1.0-dev0 - (unreleased)
 -----------------------
 
-* Initial release.
-  [eea]
+* Expose workflow progress via RestAPI
+  [@avoinea refs #124586]
