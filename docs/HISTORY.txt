@@ -1,7 +1,7 @@
 Changelog
 =========
 
-1.0-dev0 - (unreleased)
+1.0 - (2020-11-25)
 -----------------------
 
 * Expose workflow progress via RestAPI
