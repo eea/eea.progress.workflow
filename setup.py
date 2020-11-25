@@ -12,6 +12,7 @@ setup(
     name=NAME,
     version=VERSION,
     description="Workflow progress RestAPI",
+    long_description_content_type="text/x-rst",
     long_description=(
         open("README.rst").read() +
         "\n" +
