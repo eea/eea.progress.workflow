@@ -1,0 +1,11 @@
+version: "2"
+services:
+  plone:
+    image: plone:4
+    ports:
+    - "8080"
+    volumes:
+    - ../../:/plone/instance/src/eea.progress.workflow
+    environment:
+      ADDONS: "eea.progress.workflow[test]"
+      DEVELOP: "src/eea.progress.workflow"
