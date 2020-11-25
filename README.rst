@@ -16,7 +16,14 @@ A Plone add-on that expose workflow progress via RestAPI
 Main features
 =============
 
-1. RestAPI workflow progress
+1. RestAPI workflow progress::
+
+    $ curl -H 'Accept: application/json' --user admin:admin -i http://localhost:8080/Plone/a-page/@workflow.progress
+
+    or
+
+    $ curl -H 'Accept: application/json' --user admin:admin -i http://localhost:8080/Plone/a-page?expand=workflow.progress
+
 
 Install
 =======
