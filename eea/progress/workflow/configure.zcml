@@ -6,7 +6,11 @@
   <i18n:registerTranslations directory="locales" />
 
   <include file="profiles.zcml" />
+  
+  <include package=".api" />
   <include package=".browser" />
+  <include package=".restapi" />
   <include package=".upgrades" />
+  <include package=".zmi" />
 
 </configure>
