@@ -1,6 +1,9 @@
 Changelog
 =========
 
+1.2-dev0 - (unreleased)
+---------------------------
+
 1.1 - (2020-11-26)
 ---------------------------
 * Bug fix: Could not adapt Document to IWorkflowProgress
