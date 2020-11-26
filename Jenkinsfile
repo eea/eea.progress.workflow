@@ -143,7 +143,7 @@ pipeline {
       steps {
         node(label: 'swarm') {
           script{
-            // checkout scm
+            checkout scm
             // dir("xunit-reports") {
             //   unstash "xunit-reports"
             // }
