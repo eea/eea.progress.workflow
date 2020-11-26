@@ -16,7 +16,7 @@
   </class>
 
   <class class="Products.Archetypes.BaseObject.BaseObject" zcml:condition="installed Products.Archetypes">
-    <implements interface="eea.progressbar.interfaces.IBaseObject" />
+    <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
   </class>
 
   <adapter
