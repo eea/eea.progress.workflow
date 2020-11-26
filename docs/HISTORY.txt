@@ -3,6 +3,8 @@ Changelog
 
 1.1-dev0 - (unreleased)
 ---------------------------
+* Bug fix: Could not adapt Document to IWorkflowProgress
+  [@avoinea refs #124586]
 
 1.0 - (2020-11-25)
 -----------------------

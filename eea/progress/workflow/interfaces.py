@@ -1,4 +1,9 @@
-"""Module where all interfaces, events and exceptions live."""
+""" Module where all interfaces, events and exceptions live.
+
+    >>> portal = layer['portal']
+    >>> sandbox = portal._getOb('sandbox')
+
+"""
 
 from zope import schema
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
@@ -39,7 +44,7 @@ class IWorkflowProgress(Interface):
       - pending = 66%
       - published = 100%
 
-
+        >>> from eea.progress.workflow.interfaces import IWorkflowProgress
         >>> IWorkflowProgress(sandbox).hasProgress
         False
 
