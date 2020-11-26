@@ -15,6 +15,10 @@
     <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
   </class>
 
+  <class class="Products.Archetypes.BaseObject.BaseObject" zcml:condition="installed Products.Archetypes">
+    <implements interface="eea.progressbar.interfaces.IBaseObject" />
+  </class>
+
   <adapter
     for="eea.progress.workflow.interfaces.IBaseObject"
     provides="eea.progress.workflow.interfaces.IWorkflowProgress"
