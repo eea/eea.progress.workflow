@@ -17,7 +17,7 @@ def test_suite():
     suite.addTests([
         layered(
             doctest.DocFileSuite(
-                'README.txt',
+                'interfaces.py',
                 optionflags=OPTIONFLAGS,
                 package='eea.progress.workflow'),
             layer=FUNCTIONAL_TESTING),

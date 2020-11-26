@@ -5,7 +5,7 @@ from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.serializer.converters import json_compatible
 from plone.restapi.services import Service
 from Products.CMFPlone.interfaces import IPloneSiteRoot
-from zope.component import adapter
+from zope.component import adapter, queryAdapter
 from zope.interface import implementer
 from zope.interface import Interface
 from eea.progress.workflow.interfaces import IWorkflowProgress
@@ -30,9 +30,12 @@ class WorkflowProgress(object):
         if IPloneSiteRoot.providedBy(self.context):
             return result
 
-        progress = IWorkflowProgress(self.context)
-        result["workflow.progress"]['steps'] = json_compatible(progress.steps)
-        result["workflow.progress"]['done'] = json_compatible(progress.done)
+        progress = queryAdapter(self.context, IWorkflowProgress)
+        if progress:
+            result["workflow.progress"]['steps'] = json_compatible(
+                progress.steps)
+            result["workflow.progress"]['done'] = json_compatible(
+                progress.done)
         return result
 
 

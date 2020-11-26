@@ -11,7 +11,11 @@
     <implements interface="eea.progress.workflow.interfaces.IWorkflow" />
   </class>
 
-  <class class="plone.dexterity.content.Container">
+  <class class="plone.dexterity.content.DexterityContent">
+    <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
+  </class>
+
+  <class class="Products.Archetypes.BaseObject.BaseObject" zcml:condition="installed Products.Archetypes">
     <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
   </class>
 

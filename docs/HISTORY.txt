@@ -1,6 +1,11 @@
 Changelog
 =========
 
+1.1 - (2020-11-26)
+---------------------------
+* Bug fix: Could not adapt Document to IWorkflowProgress
+  [@avoinea refs #124586]
+
 1.0 - (2020-11-25)
 -----------------------
 
