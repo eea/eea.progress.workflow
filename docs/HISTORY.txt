@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.1-dev0 - (unreleased)
+---------------------------
+
 2.0 - (2020-12-04)
 ---------------------------
 * Change: Guess Progress: 25 50 75 100 and minProgress -1
