@@ -26,7 +26,7 @@ class WorkflowProgress(object):
     @property
     def minProgress(self):
         """Minimum progress to display"""
-        return 0
+        return -1
 
     @property
     def hasProgress(self):
@@ -50,9 +50,9 @@ class WorkflowProgress(object):
     def guessProgress(self, state):
         """Guess progress from state"""
         if "private" in state.lower():
-            return 33
+            return 25
         elif "pending" in state.lower():
-            return 66
+            return 50
         elif "published" in state.lower():
             return 100
         elif "visible" in state.lower():
@@ -61,7 +61,7 @@ class WorkflowProgress(object):
             return 100
         elif "external" in state.lower():
             return 100
-        return 0
+        return 75
 
     @property
     def progress(self):
