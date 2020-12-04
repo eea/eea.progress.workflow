@@ -40,8 +40,8 @@ class IWorkflowProgress(Interface):
     By default, if you don't manually define any progress via ZMI
     the system tries to guess the progress using a very simple algorithm:
 
-      - private = 33%
-      - pending = 66%
+      - private = 25%
+      - pending = 50%
       - published = 100%
 
         >>> from eea.progress.workflow.interfaces import IWorkflowProgress
@@ -49,11 +49,11 @@ class IWorkflowProgress(Interface):
         False
 
         >>> IWorkflowProgress(sandbox).progress
-        33
+        25
 
         >>> portal.portal_workflow.doActionFor(sandbox, 'submit')
         >>> IWorkflowProgress(sandbox).progress
-        66
+        50
 
         >>> portal.portal_workflow.doActionFor(sandbox, 'publish')
         >>> IWorkflowProgress(sandbox).progress
@@ -63,7 +63,7 @@ class IWorkflowProgress(Interface):
 
 
         >>> IWorkflowProgress(sandbox).steps
-        [(['private'], 33, ['Private'], ...(['published'], 100, ['Publish...)]
+        [(['private'], 25, ['Private'], ...(['published'], 100, ['Publish...)]
 
     And % done (on a simple item it's the same as progress). This is useful
     within Collections
@@ -99,7 +99,7 @@ class IWorkflowProgress(Interface):
         60
 
         >>> IWorkflowProgress(sandbox).steps
-        [(['pending'], 60, ['Pending revi... (['published'], 90, ['Publi...)]
+        [(['private'], 0, ['Private'],...['pending'], 60, ['Pending...
 
     """
     progress = schema.Int(
