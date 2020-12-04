@@ -99,7 +99,7 @@ class IWorkflowProgress(Interface):
         60
 
         >>> IWorkflowProgress(sandbox).steps
-        [(['private'], 0, ['Private'],...['pending'], 60, ['Pending revi... (['published'], 90, ['Publi...)]
+        [(['private'], 0, ['Private'],...['pending'], 60, ['Pending...
 
     """
     progress = schema.Int(
