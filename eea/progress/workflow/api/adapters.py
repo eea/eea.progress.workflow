@@ -4,6 +4,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import base_hasattr
 from zope.interface import implementer
+from zope.component import queryAdapter
+from plone.uuid.interfaces import IUUID
 from eea.progress.workflow.interfaces import IWorkflowProgress
 
 
