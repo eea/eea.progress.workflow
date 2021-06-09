@@ -42,6 +42,7 @@ setup(
     install_requires=[
         "setuptools",
         # -*- Extra requirements: -*-
+        'plone.app.collection',
     ],
     extras_require={
         "test": [
