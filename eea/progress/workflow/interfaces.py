@@ -8,19 +8,7 @@
 from zope import schema
 from zope.publisher.interfaces.browser import IDefaultBrowserLayer
 from zope.interface import Interface
-from Products.ZCatalog.interfaces import ICatalogBrain as IZCatalogBrain
-from plone.app.collection.interfaces import ICollection as IPloneCollection
 from eea.progress.workflow.config import EEAMessageFactory as _
-
-
-class IWorkflowTool(Interface):
-    """ Marker interface for portal_workflow
-    """
-
-
-class ICatalogBrain(IZCatalogBrain):
-    """ Marker interface for Catalog Brains
-    """
 
 
 class IBaseObject(Interface):
@@ -135,8 +123,3 @@ class IWorkflowProgress(Interface):
         description=_(u"A list of workflow steps with percetage"),
         readonly=True
     )
-
-
-class ICollection(IPloneCollection):
-    """ Marker interface for plone.app.collection
-    """

@@ -19,29 +19,10 @@
     <implements interface="eea.progress.workflow.interfaces.IBaseObject" />
   </class>
 
-  <class class="plone.app.collection.collection.Collection">
-    <implements interface="eea.progress.workflow.interfaces.ICollection" />
-  </class>
-
-  <class class="Products.CMFPlone.WorkflowTool.WorkflowTool">
-    <implements interface="eea.progress.workflow.interfaces.IWorkflowTool" />
-  </class>
-
-  <class class="Products.ZCatalog.CatalogBrains.AbstractCatalogBrain">
-    <implements interface="eea.progress.workflow.interfaces.ICatalogBrain" />
-  </class>
-
   <adapter
     for="eea.progress.workflow.interfaces.IBaseObject"
     provides="eea.progress.workflow.interfaces.IWorkflowProgress"
     factory=".adapters.WorkflowProgress"
     />
-
-  <adapter
-    for="eea.progress.workflow.interfaces.ICollection"
-    provides="eea.progress.workflow.interfaces.IWorkflowProgress"
-    factory=".adapters.CollectionWorkflowProgress"
-    />
-
 
 </configure>
