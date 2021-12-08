@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.2 - (2021-12-08)
+---------------------------
+* Feature: Add transitions to @workflow.progress RestAPI endpoint
+  [avoinea refs #124587]
+
 2.1 - (2021-06-11)
 ---------------------------
 * Change: Merge #134214
