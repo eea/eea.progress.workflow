@@ -97,6 +97,8 @@ class WorkflowProgress(object):
 
     @property
     def transitions(self):
+        """ Possible transitions from current state
+        """
         wftool = getToolByName(self.context, "portal_workflow")
         actions = wftool.listActionInfos(object=self.context)
         transitions = []

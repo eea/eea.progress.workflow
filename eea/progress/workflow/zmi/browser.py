@@ -25,7 +25,7 @@ class ZMIStateProgressEdit(BrowserView):
         self.setProperties(form)
 
         redirect = form.get('redirect', self.__name__)
-        self.request.response.redirect(
+        return self.request.response.redirect(
             redirect + '?manage_tabs_message=Changes saved')
 
 
