@@ -96,6 +96,32 @@ class WorkflowProgress(object):
         return self._progress
 
     @property
+    def transitions(self):
+        wftool = getToolByName(self.context, "portal_workflow")
+        actions = wftool.listActionInfos(object=self.context)
+        transitions = []
+        for action in actions:
+            if action["category"] != "workflow":
+                continue
+
+            title = action["title"]
+            item = {
+                    "@id": "{}/@workflow/{}".format(
+                        self.context.absolute_url(), action["id"]
+                    ),
+                    "title": self.context.translate(title),
+                }
+            transition = action.get('transition')
+            if transition:
+                item['new_state_id'] = transition.new_state_id
+                item['name'] = transition.id
+                item['label'] = transition.title
+                item['description'] = transition.description
+
+            transitions.append(item)
+        return transitions
+
+    @property
     def done(self):
         """Done"""
         return self.progress
@@ -106,8 +132,8 @@ class WorkflowProgress(object):
 
         (
           ('private', 0, 'Private'),
-          ('pending': 50, 'Pending'),
-          ('visible': 50, 'Public Draft'),
+          ('pending', 50, 'Pending'),
+          ('visible', 50, 'Public Draft'),
           ('published', 100, 'Public')
         )
 

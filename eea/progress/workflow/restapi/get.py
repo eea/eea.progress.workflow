@@ -36,6 +36,8 @@ class WorkflowProgress(object):
                 progress.steps)
             result["workflow.progress"]['done'] = json_compatible(
                 progress.done)
+            result["workflow.progress"]['transitions'] = json_compatible(
+                progress.transitions)
         return result
 
 
