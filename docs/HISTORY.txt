@@ -1,6 +1,9 @@
 Changelog
 =========
 
+2.3-dev0 - (unreleased)
+---------------------------
+
 2.2 - (2021-12-08)
 ---------------------------
 * Feature: Add transitions to @workflow.progress RestAPI endpoint
