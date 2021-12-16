@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.3 - (2021-12-16)
+---------------------------
+* Change: Fix package classifiers and python_requires
+  [avoinea]
+
 2.2 - (2021-12-08)
 ---------------------------
 * Feature: Add transitions to @workflow.progress RestAPI endpoint
