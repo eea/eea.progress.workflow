@@ -44,6 +44,7 @@ class WorkflowToolXMLAdapter(XMLAdapterBase):
 
     node = property(_exportNode, _importNode)
 
+
 class WorkflowXMLAdapter(XMLAdapterBase):
     """ Generic setup import/export xml adapter
     """
@@ -77,6 +78,7 @@ class WorkflowXMLAdapter(XMLAdapterBase):
             importer.node = child
 
     node = property(_exportNode, _importNode)
+
 
 class WorkflowStateXMLAdapter(XMLAdapterBase):
     """ Generic setup import/export xml adapter
