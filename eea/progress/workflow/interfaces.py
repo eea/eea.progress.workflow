@@ -30,6 +30,11 @@ class IWorkflowState(Interface):
     """
 
 
+class IWorkflowTool(Interface):
+    """ Marker interface for portal_workflow
+    """
+
+
 #
 # Adapters
 #

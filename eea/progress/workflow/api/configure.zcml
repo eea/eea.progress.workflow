@@ -3,6 +3,10 @@
   xmlns:zcml="http://namespaces.zope.org/zcml"
   i18n_domain="eea">
 
+  <class class="Products.CMFPlone.WorkflowTool.WorkflowTool">
+    <implements interface="eea.progress.workflow.interfaces.IWorkflowTool" />
+  </class>
+
   <class class="Products.DCWorkflow.States.StateDefinition">
     <implements interface="eea.progress.workflow.interfaces.IWorkflowState" />
   </class>
