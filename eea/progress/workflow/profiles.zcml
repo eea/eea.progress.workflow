@@ -24,6 +24,21 @@
       post_handler=".setuphandlers.uninstall"
       />
 
+  <genericsetup:importStep
+    name="workflow.progress.xml"
+    title="Workflow progress monitoring"
+    description="Progress monitoring based on workflow states"
+    handler="eea.progress.workflow.exportimport.importWorkflowProgress">
+    <depends name="workflow"/>
+  </genericsetup:importStep>
+
+  <genericsetup:exportStep
+    name="workflow.progress.xml"
+    title="Workflow progress monitoring"
+    description="Progress monitoring based on workflow states"
+    handler="eea.progress.workflow.exportimport.exportWorkflowProgress"
+    />
+
   <utility
       factory=".setuphandlers.HiddenProfiles"
       name="eea.progress.workflow-hiddenprofiles"
