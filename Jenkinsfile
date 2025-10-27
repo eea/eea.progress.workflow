@@ -28,22 +28,34 @@ pipeline {
             }
           },
 
-          "PEP8": {
+          "Ruff": {
             node(label: 'docker') {
               script {
-                sh '''docker run -i --rm --name="$BUILD_TAG-pep8" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pep8'''
-              }
-            }
-          },
+                if (!(env.BRANCH_NAME != "master" && (env.CHANGE_ID == null || env.CHANGE_ID == ''))) {
+                  return
+                }
+                checkout scm
+                fix_result = sh(script: '''docker run --pull=always --name="$BUILD_TAG-ruff-fix" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/ruff format''', returnStatus: true)
+                sh '''docker cp $BUILD_TAG-ruff-fix:/code/$GIT_NAME .'''
+                sh '''cp -rf eea.progress.workflow/* .'''
+                sh '''rm -rf eea.progress.workflow'''
+                sh '''docker rm -v $BUILD_TAG-ruff-fix'''
+                FOUND_FIX = sh(script: '''git diff --name-only '*.py' | wc -l''', returnStdout: true).trim()
 
-          "PyLint": {
-            node(label: 'docker') {
-              script {
-                sh '''docker run -i --rm --name="$BUILD_TAG-pylint" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pylint'''
+                if (FOUND_FIX != '0') {
+                  withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN')]) {
+                    sh '''sed -i "s|url = .*|url = https://eea-jenkins:$GITHUB_TOKEN@github.com/eea/$GIT_NAME.git|" .git/config'''
+                  }
+                  sh '''git fetch origin $GIT_BRANCH:$GIT_BRANCH'''
+                  sh '''git checkout $GIT_BRANCH'''
+                  sh '''git add -- '*.py' '''
+                  sh '''git commit -m "style: Automated code fix" '''
+                  sh '''git push --set-upstream origin $GIT_BRANCH'''
+                  sh '''exit 1'''
+                }
               }
             }
           }
-
         )
       }
     }
@@ -64,9 +76,32 @@ pipeline {
             }
           },
 
-          "PyFlakes": {
+          "Ruff": {
             node(label: 'docker') {
-              sh '''docker run -i --rm --name="$BUILD_TAG-pyflakes" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/pyflakes'''
+              script {
+                if (!(env.BRANCH_NAME != "master" && (env.CHANGE_ID == null || env.CHANGE_ID == ''))) {
+                  return
+                }
+                checkout scm
+                fix_result = sh(script: '''docker run --pull=always --name="$BUILD_TAG-ruff-fix" -e GIT_SRC="https://github.com/eea/$GIT_NAME.git" -e GIT_NAME="$GIT_NAME" -e GIT_BRANCH="$BRANCH_NAME" -e GIT_CHANGE_ID="$CHANGE_ID" eeacms/ruff check''', returnStatus: true)
+                sh '''docker cp $BUILD_TAG-ruff-fix:/code/$GIT_NAME .'''
+                sh '''cp -rf eea.progress.workflow/* .'''
+                sh '''rm -rf eea.progress.workflow'''
+                sh '''docker rm -v $BUILD_TAG-ruff-fix'''
+                FOUND_FIX = sh(script: '''git diff --name-only '*.py' | wc -l''', returnStdout: true).trim()
+
+                if (FOUND_FIX != '0') {
+                  withCredentials([string(credentialsId: 'eea-jenkins-token', variable: 'GITHUB_TOKEN')]) {
+                    sh '''sed -i "s|url = .*|url = https://eea-jenkins:$GITHUB_TOKEN@github.com/eea/$GIT_NAME.git|" .git/config'''
+                  }
+                  sh '''git fetch origin $GIT_BRANCH:$GIT_BRANCH'''
+                  sh '''git checkout $GIT_BRANCH'''
+                  sh '''git add -- '*.py' '''
+                  sh '''git commit -m "lint: Automated code fix" '''
+                  sh '''git push --set-upstream origin $GIT_BRANCH'''
+                  sh '''exit 1'''
+                }
+              }
             }
           },
 
