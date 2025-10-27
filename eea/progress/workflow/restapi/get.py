@@ -1,5 +1,5 @@
-""" GET
-"""
+"""GET"""
+
 # -*- coding: utf-8 -*-
 from plone.restapi.interfaces import IExpandableElement
 from plone.restapi.serializer.converters import json_compatible
@@ -14,16 +14,18 @@ from eea.progress.workflow.interfaces import IWorkflowProgress
 @implementer(IExpandableElement)
 @adapter(Interface, Interface)
 class WorkflowProgress(object):
-    """ Get workflow progress
-    """
+    """Get workflow progress"""
+
     def __init__(self, context, request):
         self.context = context
         self.request = request
 
     def __call__(self, expand=False):
-        result = {"workflow.progress": {
-            "@id": "{}/@workflow.progress".format(self.context.absolute_url())
-        }}
+        result = {
+            "workflow.progress": {
+                "@id": "{}/@workflow.progress".format(self.context.absolute_url())
+            }
+        }
         if not expand:
             return result
 
@@ -32,12 +34,11 @@ class WorkflowProgress(object):
 
         progress = queryAdapter(self.context, IWorkflowProgress)
         if progress:
-            result["workflow.progress"]['steps'] = json_compatible(
-                progress.steps)
-            result["workflow.progress"]['done'] = json_compatible(
-                progress.done)
-            result["workflow.progress"]['transitions'] = json_compatible(
-                progress.transitions)
+            result["workflow.progress"]["steps"] = json_compatible(progress.steps)
+            result["workflow.progress"]["done"] = json_compatible(progress.done)
+            result["workflow.progress"]["transitions"] = json_compatible(
+                progress.transitions
+            )
         return result
 
 
@@ -45,7 +46,6 @@ class WorkflowProgressGet(Service):
     """Get workflow progress information"""
 
     def reply(self):
-        """ Reply
-        """
+        """Reply"""
         info = WorkflowProgress(self.context, self.request)
         return info(expand=True)["workflow.progress"]
