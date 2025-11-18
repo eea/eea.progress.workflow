@@ -1,5 +1,5 @@
-""" Progress adapters
-"""
+"""Progress adapters"""
+
 from Products.CMFCore.utils import getToolByName
 from Products.CMFCore.WorkflowCore import WorkflowException
 from Products.CMFPlone.utils import base_hasattr
@@ -38,8 +38,7 @@ class WorkflowProgress(object):
         workflows = wftool.getWorkflowsFor(self.context)
         for wf in workflows:
             for state in wf.states.values():
-                progress = (state.progress if
-                            base_hasattr(state, "progress") else None)
+                progress = state.progress if base_hasattr(state, "progress") else None
                 if progress:
                     self._hasProgress = True
                     return self._hasProgress
@@ -87,8 +86,7 @@ class WorkflowProgress(object):
             state = wf.states.get(state)
             if not state:
                 continue
-            progress = (state.progress if
-                        base_hasattr(state, "progress") else None)
+            progress = state.progress if base_hasattr(state, "progress") else None
             if progress is not None:
                 self._progress = progress
                 break
@@ -97,8 +95,7 @@ class WorkflowProgress(object):
 
     @property
     def transitions(self):
-        """ Possible transitions from current state
-        """
+        """Possible transitions from current state"""
         wftool = getToolByName(self.context, "portal_workflow")
         actions = wftool.listActionInfos(object=self.context)
         transitions = []
@@ -108,17 +105,17 @@ class WorkflowProgress(object):
 
             title = action["title"]
             item = {
-                    "@id": "{}/@workflow/{}".format(
-                        self.context.absolute_url(), action["id"]
-                    ),
-                    "title": self.context.translate(title),
-                }
-            transition = action.get('transition')
+                "@id": "{}/@workflow/{}".format(
+                    self.context.absolute_url(), action["id"]
+                ),
+                "title": self.context.translate(title),
+            }
+            transition = action.get("transition")
             if transition:
-                item['new_state_id'] = transition.new_state_id
-                item['name'] = transition.id
-                item['label'] = transition.title
-                item['description'] = transition.description
+                item["new_state_id"] = transition.new_state_id
+                item["name"] = transition.id
+                item["label"] = transition.title
+                item["description"] = transition.description
 
             transitions.append(item)
         return transitions
@@ -152,8 +149,7 @@ class WorkflowProgress(object):
         for wf in wftool.getWorkflowsFor(self.context):
             for name, item in sorted(
                 wf.states.items(),
-                key=lambda a: (a[1].progress if
-                               base_hasattr(a[1], "progress") else 0)
+                key=lambda a: (a[1].progress if base_hasattr(a[1], "progress") else 0)
                 if hasProgress
                 else self.guessProgress(a[0]),
             ):
@@ -164,8 +160,7 @@ class WorkflowProgress(object):
                     else title
                 )
                 if hasProgress:
-                    progress = (item.progress if
-                                base_hasattr(item, "progress") else 0)
+                    progress = item.progress if base_hasattr(item, "progress") else 0
                 else:
                     progress = self.guessProgress(name)
 
@@ -184,10 +179,16 @@ class WorkflowProgress(object):
                     desc_list.append(description)
                 else:
                     step = (
-                        [name, ],
+                        [
+                            name,
+                        ],
                         progress,
-                        [title, ],
-                        [description, ],
+                        [
+                            title,
+                        ],
+                        [
+                            description,
+                        ],
                     )
                     self._steps.append(step)
                     progress_steps[progress] = step
