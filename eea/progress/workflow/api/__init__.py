@@ -1,2 +1,1 @@
-""" Low level API
-"""
+"""Low level API"""

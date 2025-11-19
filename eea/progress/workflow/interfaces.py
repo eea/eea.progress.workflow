@@ -1,7 +1,7 @@
-""" Module where all interfaces, events and exceptions live.
+"""Module where all interfaces, events and exceptions live.
 
-    >>> portal = layer['portal']
-    >>> sandbox = portal._getOb('sandbox')
+>>> portal = layer['portal']
+>>> sandbox = portal._getOb('sandbox')
 
 """
 
@@ -12,8 +12,7 @@ from eea.progress.workflow.config import EEAMessageFactory as _
 
 
 class IBaseObject(Interface):
-    """ Marker interface for Archetypes or Dexterity objects
-    """
+    """Marker interface for Archetypes or Dexterity objects"""
 
 
 class IEeaProgressWorkflowLayer(IDefaultBrowserLayer):
@@ -21,18 +20,15 @@ class IEeaProgressWorkflowLayer(IDefaultBrowserLayer):
 
 
 class IWorkflow(Interface):
-    """ Marker interface for workflow
-    """
+    """Marker interface for workflow"""
 
 
 class IWorkflowState(Interface):
-    """ Marker interface for workflow state
-    """
+    """Marker interface for workflow state"""
 
 
 class IWorkflowTool(Interface):
-    """ Marker interface for portal_workflow
-    """
+    """Marker interface for portal_workflow"""
 
 
 #
@@ -107,24 +103,29 @@ class IWorkflowProgress(Interface):
         [(['private'], 0, ['Private'],...['pending'], 60, ['Pending...
 
     """
+
     progress = schema.Int(
-        title=_(u"Progress"),
-        description=_(u"For a folderish item, this can be the sum of all items"
-                      "with progress 100% / total items possible progress"),
+        title=_("Progress"),
+        description=_(
+            "For a folderish item, this can be the sum of all items"
+            "with progress 100% / total items possible progress"
+        ),
         readonly=True,
-        default=0
+        default=0,
     )
 
     done = schema.Int(
-        title=_(u"% Done"),
-        description=_(u"For a folderish item, this can be the sum of all items"
-                      "progress / total items possible progress"),
+        title=_("% Done"),
+        description=_(
+            "For a folderish item, this can be the sum of all items"
+            "progress / total items possible progress"
+        ),
         readonly=True,
-        default=0
+        default=0,
     )
 
     steps = schema.List(
-        title=_(u"Steps"),
-        description=_(u"A list of workflow steps with percetage"),
-        readonly=True
+        title=_("Steps"),
+        description=_("A list of workflow steps with percetage"),
+        readonly=True,
     )
