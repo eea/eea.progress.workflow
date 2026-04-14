@@ -22,6 +22,7 @@ class TestWorkflowProgressSetup(unittest.TestCase):
     def test_product_installed(self):
         """Test that eea.progress.workflow is installed"""
         from Products.CMFPlone.utils import get_installer
+
         installer = get_installer(self.portal, self.layer["request"])
         self.assertTrue(installer.is_product_installed("eea.progress.workflow"))
 
@@ -42,11 +43,13 @@ class TestWorkflowProgressView(unittest.TestCase):
     def test_workflow_progress_adapter_registered(self):
         """Test that WorkflowProgress adapter class exists"""
         from eea.progress.workflow.restapi.get import WorkflowProgress
+
         self.assertIsNotNone(WorkflowProgress)
 
     def test_workflow_progress_on_site_root(self):
         """Test WorkflowProgress on site root returns basic structure"""
         from eea.progress.workflow.restapi.get import WorkflowProgress
+
         wp = WorkflowProgress(self.portal, self.portal.REQUEST)
         result = wp(expand=False)
         self.assertIn("workflow.progress", result)
@@ -55,6 +58,7 @@ class TestWorkflowProgressView(unittest.TestCase):
     def test_workflow_progress_get_class_exists(self):
         """Test that WorkflowProgressGet class exists"""
         from eea.progress.workflow.restapi.get import WorkflowProgressGet
+
         self.assertIsNotNone(WorkflowProgressGet)
 
 
@@ -72,6 +76,7 @@ class TestWorkflowProgressOnDocument(unittest.TestCase):
     def test_workflow_progress_on_document(self):
         """Test WorkflowProgress on a Document"""
         from eea.progress.workflow.restapi.get import WorkflowProgress
+
         doc = self.portal["test-doc"]
         wp = WorkflowProgress(doc, self.portal.REQUEST)
         result = wp(expand=True)
@@ -80,6 +85,7 @@ class TestWorkflowProgressOnDocument(unittest.TestCase):
     def test_workflow_progress_has_done_on_document(self):
         """Test that WorkflowProgress on Document has done field"""
         from eea.progress.workflow.restapi.get import WorkflowProgress
+
         doc = self.portal["test-doc"]
         wp = WorkflowProgress(doc, self.portal.REQUEST)
         result = wp(expand=True)
