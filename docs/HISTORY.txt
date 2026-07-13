@@ -1,6 +1,11 @@
 Changelog
 =========
 
+3.3 - (2026-07-13)
+---------------------------
+* Change: fix: SonarQube report - refs #305404
+  [avoinea]
+
 3.2 - (2026-04-14)
 ---------------------------
 * Change: Add integration tests for @workflow.progress REST API views
